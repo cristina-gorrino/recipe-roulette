@@ -1,3 +1,6 @@
+var searchInputEl = document.getElementById("search-input");
+var searchFormEl = document.querySelector("form");
+
 // Edamam Keys
 var eappID = "7f73f3c0";
 var eapiKey = "227a23c3411db5a135d11a5d5fe3dc22";
@@ -9,11 +12,18 @@ var sapiKey = "59d00d4a1c914e6d9187b6fbf888f420";
 //curl "https://api.edamam.com/search?q=chicken&app_id=7f73f3c0&app_key=227a23c3411db5a135d11a5d5fe3dc22&from=0&to=3&calories=591-722&health=alcohol-free"
 
 
+
+searchFormEl.addEventListener("submit", getRecipeData);
+
+
+
 // Use Edamam to search by keyword
 // Get input from user, then display ingredients and link to source recipe
-function getRecipeData(eappID, eapiKey) {
-
-    fetch("https://api.edamam.com/search?q=chicken&app_id="+ eappID+ "&app_key=" + eapiKey+ "&from=0&to=3&calories=591-722&health=alcohol-free")
+function getRecipeData(event) {
+    event.preventDefault();
+    var queryTerm = searchInputEl.value
+    console.log(queryTerm);
+    fetch("https://api.edamam.com/search?q=" + queryTerm + "&app_id="+ eappID+ "&app_key=" + eapiKey+ "&from=0&to=3&calories=591-722&health=alcohol-free")
         .then(function(searchResponse){
             console.log(searchResponse);
             return searchResponse.json()
@@ -32,9 +42,9 @@ function getRecipeData(eappID, eapiKey) {
 // Use Spoonacular to find the random recipes
 // TODO: allow user to select tags to add to request
 
-function getSpoonacularData(sapiKey) {
+function getSpoonacularData(sapiKey, queryTerm) {
 
-    fetch("https://api.spoonacular.com/recipes/complexSearch?apiKey=" + sapiKey + "&query=pasta&maxFat=25&number=2")
+    fetch("https://api.spoonacular.com/recipes/complexSearch?apiKey=" + sapiKey + "&query="+ queryTerm +"&maxFat=25&number=2")
         .then(function(searchResponse){
             console.log(searchResponse);
             return searchResponse.json()
@@ -63,8 +73,8 @@ function getRecipeDetails(recipeID, sapiKey) {
     
 
                 
-getSpoonacularData(sapiKey);
-getRecipeData(eappID, eapiKey);
+//getSpoonacularData(sapiKey, queryTerm);
+//getRecipeData(queryTerm, eappID, eapiKey);
 
 
 
