@@ -1,5 +1,6 @@
 var searchInputEl = document.getElementById("search-input");
 var searchFormEl = document.querySelector("form");
+var randomBtnEl = document.getElementById("random-btn");
 
 // Edamam Keys
 var eappID = "7f73f3c0";
@@ -14,6 +15,7 @@ var sapiKey = "59d00d4a1c914e6d9187b6fbf888f420";
 
 
 searchFormEl.addEventListener("submit", getRecipeData);
+randomBtnEl.addEventListener("click", getSpoonacularRandom);
 
 
 
@@ -23,7 +25,7 @@ function getRecipeData(event) {
     event.preventDefault();
     var queryTerm = searchInputEl.value
     console.log(queryTerm);
-    fetch("https://api.edamam.com/search?q=" + queryTerm + "&app_id="+ eappID+ "&app_key=" + eapiKey+ "&from=0&to=3&calories=591-722&health=alcohol-free")
+    fetch("https://api.edamam.com/search?q=" + queryTerm + "&app_id="+ eappID+ "&app_key=" + eapiKey)
         .then(function(searchResponse){
             console.log(searchResponse);
             return searchResponse.json()
@@ -41,6 +43,23 @@ function getRecipeData(event) {
 // Searching with spoonacular is a 2 step process. First search, then pass recipe ID to a second call to get details
 // Use Spoonacular to find the random recipes
 // TODO: allow user to select tags to add to request
+
+function getSpoonacularRandom(event) {
+    fetch("https://api.spoonacular.com/recipes/random?apiKey=" + sapiKey + "&number=3")
+    .then(function(searchResponse){
+        console.log(searchResponse);
+        return searchResponse.json()
+        .then(function(searchData){
+            console.log(searchData);
+
+    
+                             
+        })
+                        
+    })
+}
+
+
 
 function getSpoonacularData(sapiKey, queryTerm) {
 
