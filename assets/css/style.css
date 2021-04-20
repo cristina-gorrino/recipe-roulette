@@ -1,0 +1,24 @@
+#website-title {
+    font-family: 'Bungee Inline', cursive;
+    font-size: 10vh;
+    color:#ffb74d;
+
+    
+}
+
+#website-subtitle {
+    font-family: 'Poppins';
+    padding: 5px;
+    font-size: 3vh;
+}
+
+#title-container {
+    display: block;
+}
+
+#main-body {
+    padding: 20px;
+    margin: auto;
+   height: 100vh;
+    
+}
