@@ -42,6 +42,15 @@ function getRecipeData(event) {
                         }
                         resultArr.push(result);
                     }
+                var srcURL = searchData.hits[0].recipe.url;
+                console.log(srcURL);
+                // capturing recipe images and displaying them in cards
+                var imgResult1 = document.getElementById("recipe-img1")
+                imgResult1.setAttribute("src", searchData.hits[0].recipe.image);
+                var imgResult2 = document.getElementById("recipe-img2")
+                imgResult2.setAttribute("src", searchData.hits[1].recipe.image);
+                var imgResult3 = document.getElementById("recipe-img3")
+                imgResult3.setAttribute("src", searchData.hits[2].recipe.image);
 
                     displayResults(resultArr);
                          
@@ -52,9 +61,8 @@ function getRecipeData(event) {
 
 function displayResults(resultArr) {
     for (var i=0; i<3; i++){
-        console.log( document.getElementById("result"+i));
-        document.getElementById("result"+i).textContent = resultArr[i].title;
-        document.getElementById("result"+i).setAttribute("href", "./recipe.html?recipe=" +resultArr[i].recipeURL);
+        document.getElementById("result-link"+i).textContent = resultArr[i].title;
+        document.getElementById("result-link"+i).setAttribute("href", "./recipe.html?recipe=" +resultArr[i].recipeURL);
     }
 
 }
@@ -85,6 +93,13 @@ function getSpoonacularRandom(event) {
 
 
     
+            // capturing recipe images and displaying them in cards
+            var imgResult1 = document.getElementById("recipe-img1")
+                imgResult1.setAttribute("src", searchData.recipes[0].image);
+            var imgResult2 = document.getElementById("recipe-img2")
+                imgResult2.setAttribute("src", searchData.recipes[1].image);
+            var imgResult3 = document.getElementById("recipe-img3")
+                imgResult3.setAttribute("src", searchData.recipes[2].image);
                              
         })
                         
