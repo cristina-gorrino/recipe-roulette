@@ -25,12 +25,23 @@ function getRecipeData(event) {
     event.preventDefault();
     var queryTerm = searchInputEl.value
     console.log(queryTerm);
-    fetch("https://api.edamam.com/search?q=" + queryTerm + "&app_id="+ eappID+ "&app_key=" + eapiKey)
+    fetch("https://api.edamam.com/search?q=" + queryTerm + "&app_id="+ eappID+ "&app_key=" + eapiKey + "&from=0&to=3")
         .then(function(searchResponse){
             console.log(searchResponse);
             return searchResponse.json()
                 .then(function(searchData){
-                console.log(searchData);
+                    console.log(searchData);
+                    var resultArr = [];
+                    for (var i = 0; i < 3; i++) {
+                        var result = {
+                            result: i,
+                            title: searchData.hits[i].recipe.label,
+                            imageURL: searchData.hits[i].recipe.image,
+                            recipeURL: searchData.hits[i].recipe.uri
+                            
+                        }
+                        resultArr.push(result);
+                    }
                 var srcURL = searchData.hits[0].recipe.url;
                 console.log(srcURL);
                 // capturing recipe images and displaying them in cards
@@ -41,13 +52,22 @@ function getRecipeData(event) {
                 var imgResult3 = document.getElementById("recipe-img3")
                 imgResult3.setAttribute("src", searchData.hits[2].recipe.image);
 
+                    displayResults(resultArr);
                          
                 })
                     
             })
         }
 
-// Searching with spoonacular is a 2 step process. First search, then pass recipe ID to a second call to get details
+function displayResults(resultArr) {
+    for (var i=0; i<3; i++){
+        document.getElementById("result-link"+i).textContent = resultArr[i].title;
+        document.getElementById("result-link"+i).setAttribute("href", "./recipe.html?recipe=" +resultArr[i].recipeURL);
+    }
+
+}
+
+
 // Use Spoonacular to find the random recipes
 // TODO: allow user to select tags to add to request
 
@@ -58,6 +78,21 @@ function getSpoonacularRandom(event) {
         return searchResponse.json()
         .then(function(searchData){
             console.log(searchData);
+            console.log(searchData.recipes[i])
+            var resultArr = [];
+            for(var i=0; i<3; i++) {
+                var result = {
+                    result: i,
+                    title: searchData.recipes[i].title,
+                    imageURL: searchData.recipes[i].image,
+                    recipeURL: searchData.recipes[i].spoonacularSourceUrl
+                }
+                resultArr.push(result);
+            }
+            displayResults(resultArr);
+
+
+    
             // capturing recipe images and displaying them in cards
             var imgResult1 = document.getElementById("recipe-img1")
                 imgResult1.setAttribute("src", searchData.recipes[0].image);
@@ -73,6 +108,8 @@ function getSpoonacularRandom(event) {
 
 
 
+// TODO: these functions not used
+// Searching with spoonacular is a 2 step process. First search, then pass recipe ID to a second call to get details
 function getSpoonacularData(sapiKey, queryTerm) {
 
     fetch("https://api.spoonacular.com/recipes/complexSearch?apiKey=" + sapiKey + "&query="+ queryTerm +"&maxFat=25&number=2")
@@ -108,17 +145,3 @@ function getRecipeDetails(recipeID, sapiKey) {
 //getRecipeData(queryTerm, eappID, eapiKey);
 
 
-
-    //event.preventDefault();
-    //var searchString = searchInputEl.value;
-   /*
-    fetch("http://api.openweathermap.org/geo/1.0/direct?q=" + searchCity + "&limit=1&appid=" + apiKey)
-        .then(function(geoResponse){
-            return geoResponse.json()     
-            .then(function(geoData){
-                var lat = geoData[0].lat;
-                var lon = geoData[0].lon;
-                var cityName = geoData[0].name;
-                historyArr.push({"city":cityName, "longitude": lon, "latitude": lat});
-                localStorage.setItem("historyArr", JSON.stringify(historyArr));
-                */
