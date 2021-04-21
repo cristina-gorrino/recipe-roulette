@@ -19,6 +19,14 @@
 #main-body {
     padding: 20px;
     margin: auto;
-   height: 100vh;
+   height: 100%;
     
+}
+
+#search-results {
+    margin: auto;
+    padding: 10px;
+    position: relative;
+ 
+
 }

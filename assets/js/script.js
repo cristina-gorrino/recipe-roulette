@@ -33,6 +33,13 @@ function getRecipeData(event) {
                 console.log(searchData);
                 var srcURL = searchData.hits[0].recipe.url;
                 console.log(srcURL);
+                // capturing recipe images and displaying them in cards
+                var imgResult1 = document.getElementById("recipe-img1")
+                imgResult1.setAttribute("src", searchData.hits[0].recipe.image);
+                var imgResult2 = document.getElementById("recipe-img2")
+                imgResult2.setAttribute("src", searchData.hits[1].recipe.image);
+                var imgResult3 = document.getElementById("recipe-img3")
+                imgResult3.setAttribute("src", searchData.hits[2].recipe.image);
 
                          
                 })
@@ -51,8 +58,13 @@ function getSpoonacularRandom(event) {
         return searchResponse.json()
         .then(function(searchData){
             console.log(searchData);
-
-    
+            // capturing recipe images and displaying them in cards
+            var imgResult1 = document.getElementById("recipe-img1")
+                imgResult1.setAttribute("src", searchData.recipes[0].image);
+            var imgResult2 = document.getElementById("recipe-img2")
+                imgResult2.setAttribute("src", searchData.recipes[1].image);
+            var imgResult3 = document.getElementById("recipe-img3")
+                imgResult3.setAttribute("src", searchData.recipes[2].image);
                              
         })
                         
