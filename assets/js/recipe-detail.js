@@ -42,30 +42,20 @@ getRecipeURL = function () {
             return searchResponse.json()
                 .then(function(searchData){
                     console.log(searchData);
-                   /*
-                    var resultArr = [];
-                    for (var i = 0; i < 3; i++) {
+                   
                         var result = {
-                            result: i,
-                            sourceAPI: "edamam",
-                            title: searchData.hits[i].recipe.label,
-                            imageURL: searchData.hits[i].recipe.image,
-                            recipeURL: searchData.hits[i].recipe.uri
+                            title: searchData[0].label,
+                            imageURL: searchData[0].image,
+                            ingredientsArr: searchData[0].ingredients,
+                            source: searchData[0].url
                             
                         }
-                        resultArr.push(result);
-                    }
+                    console.log(result);
 
-                // capturing recipe images and displaying them in cards
-                var imgResult1 = document.getElementById("recipe-img1")
-                imgResult1.setAttribute("src", searchData.hits[0].recipe.image);
-                var imgResult2 = document.getElementById("recipe-img2")
-                imgResult2.setAttribute("src", searchData.hits[1].recipe.image);
-                var imgResult3 = document.getElementById("recipe-img3")
-                imgResult3.setAttribute("src", searchData.hits[2].recipe.image);
 
-                    displayResults(resultArr);
-                 */        
+
+                    //displayResults(result);
+                        
                 })
                     
             })
@@ -80,6 +70,16 @@ getRecipeURL = function () {
         return searchResponse.json()
         .then(function(searchData){
             console.log(searchData);
+            var result = {
+                title: searchData.title,
+                imageURL: searchData.image,
+                ingredientsArr: searchData.extendedIingredients,
+                instructions: searchData.instructions,
+                source: searchData[0].sourceUrl
+
+                
+            }
+            console.log(result);
         })
     })
 }
