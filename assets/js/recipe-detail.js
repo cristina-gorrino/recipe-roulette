@@ -52,7 +52,7 @@ getRecipeURL = function () {
 
 
 
-                    //displayRecipe(result);
+                    displayRecipe(result);
                         
                 })
                     
@@ -71,14 +71,14 @@ getRecipeURL = function () {
             var result = {
                 title: searchData.title,
                 imageURL: searchData.image,
-                ingredientsArr: searchData.extendedIingredients,
+                ingredientsArr: searchData.extendedIngredients,
                 instructions: searchData.instructions,
                 source: searchData.sourceUrl
 
                 
             }
             console.log(result);
-            //displayRecipe(result);
+            displayRecipe(result);
         })
     })
 }
@@ -88,8 +88,27 @@ function displayRecipe(result) {
     document.getElementById("source-link").setAttribute("href", result.source);
     document.getElementById("recipe-img").setAttribute("src", result.imageURL);
     
+    // if there are result instructions the recipe is from spoonacular, else it's form edamam
+    // each API has a different way of presenting ingredients
     if (result.instructions){
-        document.getElementById("instructions").textContent
+        document.getElementById("resultInstructions").textContent = result.instructions;
+        
+        var ingredientListEl = document.getElementById("resultIngredients");
+
+        for (var i=0; i < result.ingredientsArr.length; i++) {
+            var ingredientEl = document.createElement("li")
+            ingredientEl.textContent = result.ingredientsArr[i].original
+            ingredientListEl.appendChild(ingredientEl);
+            
+        }
+    } else {
+        var ingredientListEl = document.getElementById("resultIngredients");
+
+        for (var i=0; i < result.ingredientsArr.length; i++) {
+            var ingredientEl = document.createElement("li")
+            ingredientEl.textContent = result.ingredientsArr[i].text
+            ingredientListEl.appendChild(ingredientEl);
+        }
     }
 
 }
