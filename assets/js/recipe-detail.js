@@ -54,7 +54,7 @@ getRecipeURL = function () {
 
 
 
-                    //displayResults(result);
+                    //displayRecipe(result);
                         
                 })
                     
@@ -80,7 +80,12 @@ getRecipeURL = function () {
                 
             }
             console.log(result);
+            //displayRecipe(result);
         })
     })
+}
+
+function displayRecipe(result) {
+
 }
 
