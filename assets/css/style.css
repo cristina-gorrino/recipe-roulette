@@ -19,7 +19,7 @@
 #main-body {
     padding: 20px;
     margin: auto;
-   height: 100%;
+   height: max-content;
     
 }
 
@@ -30,3 +30,21 @@
  
 
 }
+
+
+#query-box {
+    border: 3px solid black;
+}
+
+#random-box {
+    padding-top: 20px;
+   
+    
+}
+
+ .card {
+    margin: 2vh;
+    min-width: 50vh;
+    max-width: 80vh;
+    display: inline-block;
+} 
