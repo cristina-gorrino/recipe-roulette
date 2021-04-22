@@ -35,6 +35,7 @@ function getRecipeData(event) {
                     for (var i = 0; i < 3; i++) {
                         var result = {
                             result: i,
+                            sourceAPI: "edamam",
                             title: searchData.hits[i].recipe.label,
                             imageURL: searchData.hits[i].recipe.image,
                             recipeURL: searchData.hits[i].recipe.uri
@@ -62,7 +63,7 @@ function getRecipeData(event) {
 function displayResults(resultArr) {
     for (var i=0; i<3; i++){
         document.getElementById("result-link"+i).textContent = resultArr[i].title;
-        document.getElementById("result-link"+i).setAttribute("href", "./recipe.html?recipe=" +resultArr[i].recipeURL);
+        document.getElementById("result-link"+i).setAttribute("href", "./recipe.html?sourceAPI=" +resultArr[i].sourceAPI +"&recipe=" +resultArr[i].recipeURL);
     }
 
 }
@@ -83,9 +84,10 @@ function getSpoonacularRandom(event) {
             for(var i=0; i<3; i++) {
                 var result = {
                     result: i,
+                    sourceAPI: "spoonacular",
                     title: searchData.recipes[i].title,
                     imageURL: searchData.recipes[i].image,
-                    recipeURL: searchData.recipes[i].spoonacularSourceUrl
+                    recipeURL: searchData.recipes[i].id
                 }
                 resultArr.push(result);
             }
@@ -108,40 +110,5 @@ function getSpoonacularRandom(event) {
 
 
 
-// TODO: these functions not used
-// Searching with spoonacular is a 2 step process. First search, then pass recipe ID to a second call to get details
-function getSpoonacularData(sapiKey, queryTerm) {
-
-    fetch("https://api.spoonacular.com/recipes/complexSearch?apiKey=" + sapiKey + "&query="+ queryTerm +"&maxFat=25&number=2")
-        .then(function(searchResponse){
-            console.log(searchResponse);
-            return searchResponse.json()
-            .then(function(searchData){
-                console.log(searchData);
-                var recipeID = searchData.results[0].id;
-                console.log(recipeID);
-                getRecipeDetails(recipeID, sapiKey);
-        
-                                 
-            })
-                            
-        })
-}
-
-function getRecipeDetails(recipeID, sapiKey) {
-    fetch("https://api.spoonacular.com/recipes/" + recipeID+ "/information?apiKey="+ sapiKey + "&includeNutrition=false")
-    .then(function(searchResponse){
-        console.log(searchResponse);
-        return searchResponse.json()
-        .then(function(searchData){
-            console.log(searchData);
-        })
-    })
-}
-    
-
-                
-//getSpoonacularData(sapiKey, queryTerm);
-//getRecipeData(queryTerm, eappID, eapiKey);
 
 
