@@ -5,7 +5,7 @@ var eapiKey = "227a23c3411db5a135d11a5d5fe3dc22";
 // Spoonacular Keys
 var sapiKey = "59d00d4a1c914e6d9187b6fbf888f420";
 
-
+// Parse the information about the chosen recipe
 getRecipeURL = function () {
     var recipeString = `?${window.location.href.split("?")[1]}`;
     var searchTerms = new URLSearchParams(recipeString);
@@ -30,10 +30,8 @@ getRecipeURL = function () {
   getRecipeURL(); 
 
 
-
+// Edamam gets the recipes from a specific search
   function getEdamamRecipe(recipeIdentifier) {
-    
-
     var r = recipeIdentifier
     console.log(r);
     fetch("https://api.edamam.com/search?r=" + r + "&app_id="+ eappID+ "&app_key=" + eapiKey)
@@ -42,37 +40,27 @@ getRecipeURL = function () {
             return searchResponse.json()
                 .then(function(searchData){
                     console.log(searchData);
-                   /*
-                    var resultArr = [];
-                    for (var i = 0; i < 3; i++) {
+                   
                         var result = {
-                            result: i,
-                            sourceAPI: "edamam",
-                            title: searchData.hits[i].recipe.label,
-                            imageURL: searchData.hits[i].recipe.image,
-                            recipeURL: searchData.hits[i].recipe.uri
+                            title: searchData[0].label,
+                            imageURL: searchData[0].image,
+                            ingredientsArr: searchData[0].ingredients,
+                            source: searchData[0].url
                             
                         }
-                        resultArr.push(result);
-                    }
+                    console.log(result);
 
-                // capturing recipe images and displaying them in cards
-                var imgResult1 = document.getElementById("recipe-img1")
-                imgResult1.setAttribute("src", searchData.hits[0].recipe.image);
-                var imgResult2 = document.getElementById("recipe-img2")
-                imgResult2.setAttribute("src", searchData.hits[1].recipe.image);
-                var imgResult3 = document.getElementById("recipe-img3")
-                imgResult3.setAttribute("src", searchData.hits[2].recipe.image);
 
-                    displayResults(resultArr);
-                 */        
+
+                    displayRecipe(result);
+                        
                 })
                     
             })
         }
 
 
-// TODO: Spoonacular requires the ID to get recipe, Edamam can use the source uri
+// Spoonacular gets the recipes from the random search
   function getSpoonacularRecipe(recipeID) {
     fetch("https://api.spoonacular.com/recipes/" + recipeID+ "/information?apiKey="+ sapiKey + "&includeNutrition=false")
     .then(function(searchResponse){
@@ -80,7 +68,48 @@ getRecipeURL = function () {
         return searchResponse.json()
         .then(function(searchData){
             console.log(searchData);
+            var result = {
+                title: searchData.title,
+                imageURL: searchData.image,
+                ingredientsArr: searchData.extendedIngredients,
+                instructions: searchData.instructions,
+                source: searchData.sourceUrl
+
+                
+            }
+            console.log(result);
+            displayRecipe(result);
         })
     })
+}
+
+function displayRecipe(result) {
+    document.getElementById("title").textContent = result.title;
+    document.getElementById("source-link").setAttribute("href", result.source);
+    document.getElementById("recipe-img").setAttribute("src", result.imageURL);
+    
+    // if there are result instructions the recipe is from spoonacular, else it's form edamam
+    // each API has a different way of presenting ingredients
+    if (result.instructions){
+        document.getElementById("resultInstructions").textContent = result.instructions;
+        
+        var ingredientListEl = document.getElementById("resultIngredients");
+
+        for (var i=0; i < result.ingredientsArr.length; i++) {
+            var ingredientEl = document.createElement("li")
+            ingredientEl.textContent = result.ingredientsArr[i].original
+            ingredientListEl.appendChild(ingredientEl);
+            
+        }
+    } else {
+        var ingredientListEl = document.getElementById("resultIngredients");
+
+        for (var i=0; i < result.ingredientsArr.length; i++) {
+            var ingredientEl = document.createElement("li")
+            ingredientEl.textContent = result.ingredientsArr[i].text
+            ingredientListEl.appendChild(ingredientEl);
+        }
+    }
+
 }
 
