@@ -45,6 +45,11 @@
  .card {
     margin: 2vh;
     min-width: 50vh;
-    max-width: 80vh;
+    max-width: max-content;
     display: inline-block;
 } 
+
+.card-content {
+    display: inline-block;
+    overflow: scroll;
+}
