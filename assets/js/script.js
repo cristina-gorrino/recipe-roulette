@@ -1,5 +1,5 @@
 var searchInputEl = document.getElementById("search-input");
-var searchFormEl = document.querySelector("form");
+var searchBtnEl = document.querySelector("#search-btn");
 var randomBtnEl = document.getElementById("random-btn");
 
 // Edamam Keys
@@ -14,8 +14,12 @@ var sapiKey = "59d00d4a1c914e6d9187b6fbf888f420";
 
 
 
-searchFormEl.addEventListener("submit", getRecipeData);
+searchBtnEl.addEventListener("click", getRecipeData);
 randomBtnEl.addEventListener("click", getSpoonacularRandom);
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
+  });
 
 
 

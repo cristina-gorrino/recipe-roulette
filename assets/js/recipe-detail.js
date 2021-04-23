@@ -102,6 +102,8 @@ function displayRecipe(result) {
             
         }
     } else {
+        document.getElementById("resultInstructions").textContent = "See the source recipe for instructions";
+
         var ingredientListEl = document.getElementById("resultIngredients");
 
         for (var i=0; i < result.ingredientsArr.length; i++) {

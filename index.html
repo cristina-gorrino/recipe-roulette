@@ -26,14 +26,28 @@
                 <i class="material-icons prefix">mode_edit</i>
                 <input id="search-input" type ="text" class="materialize-textarea "></input>
                 <label for="icon_prefix2">Spaghetti</label>
-                <button class="btn waves-effect waves-light btn-flat" type="submit" name="action">Submit
+                <button id = "search-btn" class="btn waves-effect waves-light btn-flat" type="submit" name="action">Submit
                   <i class="material-icons right">send</i>
+                </button>
+                <button data-target="modal1" class="btn modal-trigger waves-effect waves-light btn-flat">Search History
+                  <i class="material-icons right">history</i>
                 </button>
               </div>
               <div class="input-field col s12 m6  center-align" id="random-box">
                 <a id ="random-btn" class="waves-effect waves-light btn-large">Spin the Recipe Roulette!</a>
               </div>
 
+              </div>
+
+                <!-- Modal Structure -->
+              <div id="modal1" class="modal">
+                <div class="modal-content">
+                  <h4>Saved Searches</h4>
+                  <p>Click on a button to search again</p>
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
               </div>
     
             <div class="row">
