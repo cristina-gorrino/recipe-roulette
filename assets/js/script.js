@@ -13,13 +13,11 @@ var sapiKey = "59d00d4a1c914e6d9187b6fbf888f420";
 // Variable for search history
 var historyArr = JSON.parse(localStorage.getItem("historyArr")) || [];
 
-
-//curl "https://api.edamam.com/search?q=chicken&app_id=7f73f3c0&app_key=227a23c3411db5a135d11a5d5fe3dc22&from=0&to=3&calories=591-722&health=alcohol-free"
-
-
-
+// Search by keyword button listener
 searchBtnEl.addEventListener("click", getRecipeData);
+// Recipe Roulette (random search) button listener
 randomBtnEl.addEventListener("click", getSpoonacularRandom);
+// Opens search history modal
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.modal');
     var instances = M.Modal.init(elems);
@@ -32,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function getRecipeData(event) {
     event.preventDefault();
     var queryTerm = searchInputEl.value
-    console.log(queryTerm);
+    searchInputEl.value = "";
 
     historyArr.push({"queryTerm":queryTerm});
     localStorage.setItem("historyArr", JSON.stringify(historyArr));
@@ -58,6 +56,7 @@ function getRecipeData(event) {
 
 
                     displayResults(resultArr);
+                    showResultsSection();
                     makeHistoryButtons();
                          
                 })
@@ -98,6 +97,7 @@ function getSpoonacularRandom(event) {
                 resultArr.push(result);
             }
             displayResults(resultArr);
+            showResultsSection();
 
 
     
@@ -105,6 +105,12 @@ function getSpoonacularRandom(event) {
         })
                         
     })
+}
+
+function showResultsSection () {
+    // Show this UI when after a search, when there is data to display
+    document.querySelector("#search-results").setAttribute("style","display: block");
+    
 }
 
 function makeHistoryButtons() {
@@ -148,6 +154,7 @@ historyContainerEl.addEventListener("click", function(event) {
 
 
                     displayResults(resultArr);
+                    showResultsSection();
             
                          
                 })
@@ -155,5 +162,10 @@ historyContainerEl.addEventListener("click", function(event) {
             })
 })
 
-
+//TODO: error handling
+//TODO: remove console.logs
+//TODO: remove search term from the input once it's used
+//TODO: close the modal on click of history button
+//TODO: add tags to random search
+//TODO: what else do we need for presentation?
 
