@@ -121,7 +121,7 @@ function makeHistoryButtons() {
         for (var i = 0; i < storedHistoryInfo.length; i++){
             var historyButtonEl = document.createElement("button");
             historyButtonEl.setAttribute("type", "button")
-            historyButtonEl.setAttribute("class", "waves-effect waves-light btn-large");
+            historyButtonEl.setAttribute("class", "history-button waves-effect waves-light btn-large");
             historyButtonEl.textContent = storedHistoryInfo[i].queryTerm;
             historyContainerEl.appendChild(historyButtonEl);
         } 
