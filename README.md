@@ -23,10 +23,10 @@ Below are some examples of the Recipe-Roulette app
 
 ![the steps for the recipe websight](./assets/images/mainrecipepage.png)
 
-![select recipe](./assets/images/relectrecipe.png)
+![select recipe](./assets/images/selectrecipe.png)
 
-![saved search](./img/savedsearches.png)
+![saved search](./assets/images/savedsearches.png)
 
-![recipe roulette](./img/RecipeRoulette.png)
+![recipe roulette](./assets/images/RecipeRoulette.png)
 
-![recipe final page](./img/recipefinalpage.png)
+![recipe final page](./assets/images/recipefinalpage.png)
