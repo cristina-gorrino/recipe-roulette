@@ -2,6 +2,8 @@ var searchInputEl = document.getElementById("search-input");
 var searchBtnEl = document.querySelector("#search-btn");
 var randomBtnEl = document.getElementById("random-btn");
 var historyContainerEl = document.getElementById("history-container")
+var queryBoxEl = document.getElementById("query-box");
+var errorMessage = document.createElement("p");
 
 // Edamam Keys
 var eappID = "7f73f3c0";
@@ -29,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Get input from user, then display ingredients and link to source recipe
 function getRecipeData(event) {
     event.preventDefault();
+    errorMessage.textContent = "";
     var queryTerm = searchInputEl.value
     searchInputEl.value = "";
 
@@ -59,8 +62,20 @@ function getRecipeData(event) {
                     makeHistoryButtons();
                          
                 })
+                .catch(err => {
+
+                    errorMessage.textContent = "Unsuccessful request. Please search again";
+                    queryBoxEl.appendChild(errorMessage);
+                    console.error(err);
+                });
                     
             })
+            .catch(err => {
+
+                errorMessage.textContent = "Unsuccessful request. Please search again";
+                queryBoxEl.appendChild(errorMessage);
+                console.error(err);
+            });
         }
 
 function displayResults(resultArr) {
@@ -77,6 +92,7 @@ function displayResults(resultArr) {
 // TODO: allow user to select tags to add to request
 
 function getSpoonacularRandom(event) {
+    errorMessage.textContent = "";
     fetch("https://api.spoonacular.com/recipes/random?apiKey=" + sapiKey + "&number=3")
     .then(function(searchResponse){
         return searchResponse.json()
@@ -94,13 +110,23 @@ function getSpoonacularRandom(event) {
             }
             displayResults(resultArr);
             showResultsSection();
-
-
     
                              
         })
+        .catch(err => {
+
+            errorMessage.textContent = "Unsuccessful request. Please search again";
+            queryBoxEl.appendChild(errorMessage);
+            console.error(err);
+        });
                         
     })
+    .catch(err => {
+
+        errorMessage.textContent = "Unsuccessful request. Please search again";
+        queryBoxEl.appendChild(errorMessage);
+        console.error(err);
+    });
 }
 
 function showResultsSection () {
@@ -129,6 +155,7 @@ makeHistoryButtons();
 historyContainerEl.addEventListener("click", function(event) {
     // Takes the stored data related to the history buttons, and calls the API
     var queryTerm = event.target.textContent;
+    errorMessage.textContent = "";
     fetch("https://api.edamam.com/search?q=" + queryTerm + "&app_id="+ eappID+ "&app_key=" + eapiKey + "&from=0&to=3")
         .then(function(searchResponse){
             return searchResponse.json()
@@ -152,11 +179,22 @@ historyContainerEl.addEventListener("click", function(event) {
             
                          
                 })
+                .catch(err => {
+
+                    errorMessage.textContent = "Unsuccessful request. Please search again";
+                    queryBoxEl.appendChild(errorMessage);
+                    console.error(err);
+                });
                     
-            })
+        })
+        .catch(err => {
+
+            errorMessage.textContent = "Unsuccessful request. Please search again";
+            queryBoxEl.appendChild(errorMessage);
+            console.error(err);
+        });
 })
 
-//TODO: error handling
 //TODO: remove console.logs
 //TODO: close the modal on click of history button
 //TODO: add tags to random search
