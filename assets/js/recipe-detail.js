@@ -81,7 +81,7 @@ function displayRecipe(result) {
     // if there are result instructions the recipe is from spoonacular, else it's form edamam
     // each API has a different way of presenting ingredients
     if (result.instructions){
-        document.getElementById("resultInstructions").textContent = result.instructions;
+        document.getElementById("resultInstructions").innerHTML = result.instructions;
         
         var ingredientListEl = document.getElementById("resultIngredients");
 
