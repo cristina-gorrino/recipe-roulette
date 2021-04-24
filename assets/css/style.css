@@ -31,6 +31,15 @@
 
 }
 
+#history-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.history-button{
+    margin: 20px;
+}
+
 
 #query-box {
     border: 3px solid black;
