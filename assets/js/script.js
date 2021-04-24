@@ -37,10 +37,9 @@ function getRecipeData(event) {
 
     fetch("https://api.edamam.com/search?q=" + queryTerm + "&app_id="+ eappID+ "&app_key=" + eapiKey + "&from=0&to=3")
         .then(function(searchResponse){
-            console.log(searchResponse);
             return searchResponse.json()
                 .then(function(searchData){
-                    console.log(searchData);
+
                     var resultArr = [];
                     for (var i = 0; i < 3; i++) {
                         var result = {
@@ -80,11 +79,8 @@ function displayResults(resultArr) {
 function getSpoonacularRandom(event) {
     fetch("https://api.spoonacular.com/recipes/random?apiKey=" + sapiKey + "&number=3")
     .then(function(searchResponse){
-        console.log(searchResponse);
         return searchResponse.json()
         .then(function(searchData){
-            console.log(searchData);
-            console.log(searchData.recipes[i])
             var resultArr = [];
             for(var i=0; i<3; i++) {
                 var result = {
@@ -135,10 +131,8 @@ historyContainerEl.addEventListener("click", function(event) {
     var queryTerm = event.target.textContent;
     fetch("https://api.edamam.com/search?q=" + queryTerm + "&app_id="+ eappID+ "&app_key=" + eapiKey + "&from=0&to=3")
         .then(function(searchResponse){
-            console.log(searchResponse);
             return searchResponse.json()
                 .then(function(searchData){
-                    console.log(searchData);
                     var resultArr = [];
                     for (var i = 0; i < 3; i++) {
                         var result = {
@@ -164,7 +158,6 @@ historyContainerEl.addEventListener("click", function(event) {
 
 //TODO: error handling
 //TODO: remove console.logs
-//TODO: remove search term from the input once it's used
 //TODO: close the modal on click of history button
 //TODO: add tags to random search
 //TODO: what else do we need for presentation?
