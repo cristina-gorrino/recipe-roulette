@@ -21,9 +21,9 @@ of the last three searchs they did.
 
 Below are some examples of the Recipe-Roulette app
 
-![the steps for the recipe websight](./img/mainrecipepage.png)
+![the steps for the recipe websight](./assets/images/mainrecipepage.png)
 
-![select recipe](./img/selectrecipe.png)
+![select recipe](./assets/images/relectrecipe.png)
 
 ![saved search](./img/savedsearches.png)
 
