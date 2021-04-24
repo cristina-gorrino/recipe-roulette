@@ -58,7 +58,12 @@
     display: inline-block;
 } 
 
-.card-content {
-    display: inline-block;
+
+#recipe-result-card {
     overflow: scroll;
+    height: max-content;
+}
+
+#recipe-result-img {
+    max-height: 40%;
 }

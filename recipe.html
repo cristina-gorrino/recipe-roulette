@@ -23,11 +23,12 @@
             <style> h5 {text-align: center;} </style>
             <h5 id = "title"> <b> Recipe Results </b> </h5>
             <div id="1" class="card large z-depth-3 amber darken-1">
-                <div class="card-image">
+                <div class="card-image" id="recipe-result-img">
                   <img id="recipe-img" src="">
                   
                 </div>
-              <div class="card-content">
+              <div class="card-content" id="recipe-result-card">
+                <h5>Ingredients:</h5>
                 <!-- Recipe ingredients will go inside this ul tag -->
                 <ul id="resultIngredients">
 
@@ -38,7 +39,7 @@
                 </p>
                 
               </div>
-                <div class="card-content white">
+                <div class="card-action white">
                     <p> Back to the <a href="index.html"> Recipe-Roulette </a></p>
                     <a id = "source-link" href=""> Go to the source recipe </a>
                 </div>
