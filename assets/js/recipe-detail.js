@@ -9,12 +9,9 @@ var sapiKey = "59d00d4a1c914e6d9187b6fbf888f420";
 getRecipeURL = function () {
     var recipeString = `?${window.location.href.split("?")[1]}`;
     var searchTerms = new URLSearchParams(recipeString);
-    console.log(searchTerms.get("sourceAPI"), searchTerms.get("recipe"));
     var sourceAPI = searchTerms.get("sourceAPI");
     var recipeIdentifier = searchTerms.get("recipe");
-    
-    console.log(recipeIdentifier);
-    console.log(sourceAPI);
+
     if (recipeIdentifier) {
         if (sourceAPI === "edamam") {
             getEdamamRecipe(encodeURIComponent(recipeIdentifier));
@@ -33,13 +30,10 @@ getRecipeURL = function () {
 // Edamam gets the recipes from a specific search
   function getEdamamRecipe(recipeIdentifier) {
     var r = recipeIdentifier
-    console.log(r);
     fetch("https://api.edamam.com/search?r=" + r + "&app_id="+ eappID+ "&app_key=" + eapiKey)
         .then(function(searchResponse){
-            console.log(searchResponse);
             return searchResponse.json()
                 .then(function(searchData){
-                    console.log(searchData);
                    
                         var result = {
                             title: searchData[0].label,
@@ -48,7 +42,6 @@ getRecipeURL = function () {
                             source: searchData[0].url
                             
                         }
-                    console.log(result);
 
 
 
@@ -64,10 +57,8 @@ getRecipeURL = function () {
   function getSpoonacularRecipe(recipeID) {
     fetch("https://api.spoonacular.com/recipes/" + recipeID+ "/information?apiKey="+ sapiKey + "&includeNutrition=false")
     .then(function(searchResponse){
-        console.log(searchResponse);
         return searchResponse.json()
         .then(function(searchData){
-            console.log(searchData);
             var result = {
                 title: searchData.title,
                 imageURL: searchData.image,
@@ -77,7 +68,6 @@ getRecipeURL = function () {
 
                 
             }
-            console.log(result);
             displayRecipe(result);
         })
     })
