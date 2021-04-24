@@ -4,6 +4,7 @@ var randomBtnEl = document.getElementById("random-btn");
 var historyContainerEl = document.getElementById("history-container")
 var queryBoxEl = document.getElementById("query-box");
 var errorMessage = document.createElement("p");
+var instances;
 
 // Edamam Keys
 var eappID = "7f73f3c0";
@@ -22,7 +23,7 @@ randomBtnEl.addEventListener("click", getSpoonacularRandom);
 // Opens search history modal
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems);
+    instances = M.Modal.init(elems);
   });
 
 
@@ -143,7 +144,7 @@ function makeHistoryButtons() {
         for (var i = 0; i < storedHistoryInfo.length; i++){
             var historyButtonEl = document.createElement("button");
             historyButtonEl.setAttribute("type", "button")
-            historyButtonEl.setAttribute("class", "history-button waves-effect waves-light btn-large amber darken-2");
+            historyButtonEl.setAttribute("class", "history-button modal-close waves-effect waves-light btn-large amber darken-2");
             historyButtonEl.textContent = storedHistoryInfo[i].queryTerm;
             historyContainerEl.appendChild(historyButtonEl);
         } 
